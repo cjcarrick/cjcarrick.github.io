@@ -1,0 +1,50 @@
+$green: #42b983;
+$pad: 0.4rem;
+
+$fg: hsl(0 0% 60%);
+$fgAlt: hsl(0 0% 90%);
+$bg: hsl(0 0% 5%);
+$col: hsl(266 40% 63% / 100%);
+
+$br: 0.2em;
+
+$maxWidth: 720pt;
+$textWidth: 480pt;
+$transition: 200ms;
+
+@mixin ms-depth($depth) {
+  box-shadow: 0 ceil(10 * 0.404 * $depth + 0.178) * 0.1 + 0px
+      ceil(10 * 0.904 * $depth + 0.178) * 0.1 + 0px 0
+      rgba(0, 0, 0, ceil(10 * 0.0036 * $depth + 0.152) * 0.1 + 0),
+    0 ceil(10 * 0.0768 * $depth + 0.0544) * 0.1 + 0px
+      ceil(10 * 0.227 * $depth + 0.177) * 0.1 + 0px 0
+      rgba(0, 0, 0, ceil(10 * 0.00152 * $depth + 0.136) * 0.1 + 0);
+}
+
+@mixin appear($offset: 0) {
+  opacity: 0;
+  animation: 500ms appear 1 forwards;
+
+  @for $i from 1 through 10 {
+    &:nth-child(#{$i}) {
+      animation-delay: ($i + $offset) * 150ms;
+    }
+  }
+}
+
+@mixin is-mobile {
+  @media (max-width: 600px) {
+    @content;
+  }
+}
+
+@keyframes appear {
+  0% {
+    opacity: 0;
+    transform: translate(0, $pad);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}
