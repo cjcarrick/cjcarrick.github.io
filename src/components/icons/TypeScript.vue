@@ -27,12 +27,20 @@ svg {
   }
 
   &:hover {
-    rect { fill: #3178c6; }
-    path { fill: #fff; }
+    rect {
+      fill: #3178c6;
+    }
+    path {
+      fill: #fff;
+    }
   }
   @include is-mobile {
-    rect { fill: #3178c6; }
-    path { fill: #fff; }
+    rect {
+      fill: #3178c6;
+    }
+    path {
+      fill: #fff;
+    }
   }
 }
 </style>

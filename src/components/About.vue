@@ -3,7 +3,9 @@
     <div class="container">
       <h4>Academics</h4>
       <ul>
-        <li>Currently pursuing BA in Math and CS from Santa Clara University</li>
+        <li>
+          Currently pursuing BA in Math and CS from Santa Clara University
+        </li>
         <li>4.5 High School GPA</li>
         <li>3.7 College GPA</li>
       </ul>
@@ -20,7 +22,6 @@
         <li>Unix and the command line shell</li>
         <li>Some Python and Rust</li>
       </ul>
-
 
       <h4>Experience</h4>
       <ul>

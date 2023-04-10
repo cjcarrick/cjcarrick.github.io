@@ -41,6 +41,7 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-vue": "^9.7.0",
+    "gh-pages": "^5.0.0",
     "typescript": "^4.6.4",
     "vite": "^3.2.3",
     "vite-plugin-node": "^1.0.0",
