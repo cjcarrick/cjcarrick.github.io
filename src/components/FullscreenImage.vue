@@ -13,16 +13,6 @@ const incr = () =>
   emit('update:index', Math.min(props.images.length - 1, props.index + 1))
 const decr = () => emit('update:index', Math.max(0, props.index - 1))
 
-const handleClick = (ev: MouseEvent) => {
-  if (ev.x < window.innerWidth * 0.333) {
-    decr()
-  } else if (ev.x > window.innerWidth * 0.666) {
-    incr()
-  } else {
-    emit('update:visible', false)
-  }
-}
-
 onMounted(() => {
   window.addEventListener('keydown', ev => {
     if (ev.key == 'Escape') {
@@ -37,7 +27,7 @@ onMounted(() => {
     <div
       class="container"
       tabindex="0"
-      @click="handleClick"
+      @click="$emit('update:visible', false)"
       @keydown.prevent.left="decr"
       @keydown.prevent.right="incr"
       @keydown.prevent.escape="emit('update:visible', false)"

@@ -50,14 +50,14 @@ onMounted(() => {
 
   <Contact />
 
-  <div class="progress">
-    <Pagination
-      v-model="page"
-      @update:model-value="page => scrollToSection(page)"
-      :pages="sections"
-      orientation="vertical"
-    />
-  </div>
+  <!-- <div class="progress"> -->
+  <!--   <Pagination -->
+  <!--     v-model="page" -->
+  <!--     @update:model-value="page => scrollToSection(page)" -->
+  <!--     :pages="sections" -->
+  <!--     orientation="vertical" -->
+  <!--   /> -->
+  <!-- </div> -->
 </template>
 
 <style lang="scss">

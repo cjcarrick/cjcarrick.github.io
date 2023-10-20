@@ -18,7 +18,7 @@ import Project from '@/components/Project.vue'
 <template>
   <Project
     id="work"
-    name="SCU ACM Svelte (WIP) (Closed Source)"
+    name="SCU ACM Svelte (WIP)"
     :images="[
       '/img/acm-home.jpg',
       '/img/acm-board.jpg',
@@ -62,7 +62,7 @@ import Project from '@/components/Project.vue'
     :images="['/img/wheel-size-summary.jpg', '/img/wheel-size-gallery.jpg']"
     :links="{
       Source: 'https://github.com/cjcarrick/wheel-size',
-      Launch: 'https://cjcarrick.github.io/wheel-size'
+      Open: 'https://cjcarrick.github.io/wheel-size'
     }"
   >
     <p>

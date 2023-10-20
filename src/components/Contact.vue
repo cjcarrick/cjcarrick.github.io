@@ -48,25 +48,15 @@ onMounted(() => (email.value = atob(email.value)))
 </template>
 
 <style scoped lang="scss">
-.contact {
-  &:hover .button {
-    background: rgba($color: $fg, $alpha: 10%);
-  }
-}
 .buttons {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: $pad;
   width: fit-content;
-
-  &:hover .button {
-    color: rgba($color: $fg, $alpha: 75%);
-  }
 }
 
 .button {
-  background: rgba($color: $fg, $alpha: 0);
   text-decoration: none;
   color: $fg;
   border-radius: 1000px;
@@ -87,7 +77,6 @@ onMounted(() => (email.value = atob(email.value)))
   }
 
   .bar {
-    background: $fg;
     min-width: 1px;
     opacity: 0.25;
     align-self: stretch;

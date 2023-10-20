@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import FullscreenImage from '@/components/FullscreenImage.vue'
 import { onMounted, ref, watch } from 'vue'
-import Pagination from './Pagination.vue'
 
 const props = defineProps<{
   name: string
@@ -14,16 +13,6 @@ const imageIndex = ref(0)
 /** used to fade from one image to the next */
 const lastImages = ref<{ [id: number]: string }>({})
 let lastImageIndex = 0
-
-const nextImage = () => {
-  if (!props.images) return
-  const nextIndex = imageIndex.value + 1
-  if (nextIndex > props.images.length - 1) {
-    imageIndex.value = 0
-  } else {
-    imageIndex.value = nextIndex
-  }
-}
 
 const visible = ref(false)
 const fullscreenVisible = ref(false)
@@ -47,7 +36,7 @@ onMounted(() => {
   observer.observe(projectContainer.value)
 })
 
-watch(imageIndex, (newVal, oldVal) => {
+watch(imageIndex, oldVal => {
   if (!props.images) return
   const i = lastImageIndex
   lastImages.value[i] = props.images[oldVal]
@@ -70,42 +59,20 @@ watch(imageIndex, (newVal, oldVal) => {
     <div class="img-container" v-if="images">
       <div class="img" @click="fullscreenVisible = true">
         <img :src="images[imageIndex]" />
-
         <FullscreenImage
           v-if="fullscreenVisible"
           :images="images"
           v-model:index="imageIndex"
           v-model:visible="fullscreenVisible"
         />
-
-        <!-- <img -->
-        <!--   class="last-image" -->
-        <!--   v-for="(image, i) in lastImages" -->
-        <!--   :src="image" -->
-        <!--   :data-id="i" -->
-        <!-- /> -->
       </div>
-
-      <!-- <div -->
-      <!--   class="dots" -->
-      <!--   v-if="project.images.length > 1" -->
-      <!--   @mouseenter="autoAdvance = false" -->
-      <!-- > -->
-      <!--   <div -->
-      <!--     class="dot-container" -->
-      <!--     @click="imageIndex = i" -->
-      <!--     v-for="(_, i) in project.images" -->
-      <!--   > -->
-      <!--     <div class="dot" :class="{ active: imageIndex == i }"></div> -->
-      <!--   </div> -->
-      <!-- </div> -->
     </div>
 
-    <Pagination
-      v-if="images && images.length > 1"
-      v-model="imageIndex"
-      :pages="images.length"
-    />
+    <div class="img-buttons">
+      <div class="img" v-for="src, i in images" @click="imageIndex = i" :class="{ active: imageIndex == i }">
+        <img :src="src" />
+      </div>
+    </div>
 
     <slot />
 
@@ -128,6 +95,54 @@ watch(imageIndex, (newVal, oldVal) => {
   }
 }
 
+.img-container {
+  .img {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: Min(40rem, 50vh);
+    overflow: hidden;
+
+    img {
+      cursor: zoom-in;
+      object-fit: contain;
+      height: 100%;
+      width: 100%;
+      border-radius: $br;
+    }
+  }
+}
+
+.img-buttons {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 6pt;
+  .img {
+    cursor: pointer;
+    height: 3rem;
+    width: 6rem;
+    opacity: 0.5;
+    position: relative;
+    border-radius: 2pt;
+    overflow: hidden;
+    &.active {
+      opacity: 1;
+      outline: 2pt solid $col;
+      outline-offset: 2pt;
+    }
+    img {
+      border-radius: 2pt;
+      width: 100%;
+      min-height: 100%;
+      object-fit:cover;
+    }
+  }
+}
+
 .project {
   display: flex;
   flex-direction: column;
@@ -137,17 +152,11 @@ watch(imageIndex, (newVal, oldVal) => {
 
   max-width: $textWidth;
   margin: 0 auto;
-
-  /* > * { */
-  /*   opacity: 0; */
-  /* } */
-  /* &.visible > * { */
-  /*   @include appear(0); */
-  /* } */
 }
 
 .img-container:hover .dots {
   opacity: 1;
+
 }
 
 .dots {
@@ -184,23 +193,6 @@ watch(imageIndex, (newVal, oldVal) => {
   }
 }
 
-.img {
-  height: 30vh;
-  aspect-ratio: 4/3;
-
-  position: relative;
-
-  img {
-    object-fit: contain;
-    max-width: 100%;
-    max-height: 100%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    border-radius: $br;
-  }
-}
 .links {
   display: flex;
   flex-direction: row;
